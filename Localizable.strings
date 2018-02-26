@@ -1,0 +1,20 @@
+/* 
+  Localizable.strings
+  SampleApp
+
+  Created by Nitzan Jaitman on 05/09/2017.
+  Copyright © 2017 Cloudinary. All rights reserved.
+*/
+
+"effect_desc_face_sat_round"="● Scale to fit screen.\n● Retain original aspect ratio\n● Add rounded corners";
+"effect_desc_face_sharpen"="● Crop focusing on automatically detected faces\n● Sharpen the image";
+"effect_desc_wide_blue"="● Crop the image to a different aspect ratio, focusing on auto-detected faces\n● Increase the intensity of the blue channel";
+"effect_desc_narrow_sepia"="● Crop focusing on automatically detected faces\n● Apply a sepia effect";
+"effect_desc_face_oilpaint"="● Crop focusing on automatically detected faces\n● Apply oil paint effect";
+
+"effect_desc_video_rotate"="● Rotate the video by 20 degrees (automatically adds a bounding box)";
+"effect_desc_video_fade_in"="● Fade in";
+"effect_desc_video_overlay"="● Add video overlay";
+"effect_desc_video_noise"="● Add noise";
+"effect_desc_video_blur"="● Blur video";
+"effect_desc_video_reverse"="● Reverse video";
