@@ -52,7 +52,6 @@ class EffectsGalleryViewController: UIViewController, UploadedResourceDetails {
         self.isVideo = resource.resourceType == "video"
         self.resourceType = isVideo ? CLDUrlResourceType.video : CLDUrlResourceType.image
 
-        let screenWidth = Int(self.view.bounds.size.width)
         DispatchQueue.global().async {
             if (self.isVideo) {
                 self.effects = CloudinaryHelper.generateVideoEffectList(cloudinary: self.cloudinary, resource: self.resource)
@@ -93,8 +92,9 @@ class EffectsGalleryViewController: UIViewController, UploadedResourceDetails {
         let transformation = effect.transformation.copy() as! CLDTransformation
 
         if (isVideo) {
-            // manually set size + dpr for video (for images goth are automatic, see the else clause below):
-            transformation.chain().setWidth(Int(round(UIScreen.main.bounds.width))).setCrop(CLDTransformation.CLDCrop.limit).setDpr(Float(UIScreen.main.scale))
+            // manually set size (for images goth are automatic, see the else clause below). Note that DPR
+            // is not supported for videos so we fetch with pixel size:
+            transformation.chain().setWidth(Int(round(UIScreen.main.bounds.width * UIScreen.main.scale)))
             self.currUrl = cloudinary.createUrl()
                     .setResourceType(self.resourceType)
                     .setTransformation(transformation)
@@ -108,7 +108,7 @@ class EffectsGalleryViewController: UIViewController, UploadedResourceDetails {
             let url = URL(string: self.currUrl!)!
             self.player.replaceCurrentItem(with: AVPlayerItem(url: url))
         } else {
-            transformation.setFetchFormat("jpg")
+            transformation.setFetchFormat("png")
             // note: This url will be used when openning the browser, this is NOT identical to the one shown
             // inside the app - In the app the size is determined automatically. In the url for browser, the size
             // will be screen width for full-screen view.
@@ -161,7 +161,7 @@ extension EffectsGalleryViewController: UICollectionViewDataSource {
 
         cell.imageView.cldSetImage(publicId: resource.publicId!, cloudinary: getAppDelegate()!.cloudinary,
                 resourceType: self.resourceType, responsiveParams: params,
-                transformation: transformation.setFetchFormat("jpg"))
+                transformation: transformation.setFetchFormat("png"))
 
         cell.indicator.startAnimating()
 

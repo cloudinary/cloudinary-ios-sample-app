@@ -10,7 +10,7 @@ import Foundation
 import Cloudinary
 
 class CloudinaryHelper {
-    static let defaultImageFormat = "jpg"
+    static let defaultImageFormat = "png"
 
     static func upload(cloudinary: CLDCloudinary, url: URL, resourceType: CLDUrlResourceType) -> CLDUploadRequest {
         let params = CLDUploadRequestParams()
@@ -43,7 +43,7 @@ class CloudinaryHelper {
         transformation = CLDTransformation().setEffect(CLDTransformation.CLDEffect.sepia)
         result.append(EffectMetadata(transformation: transformation, name: resource.name, description: NSLocalizedString("effect_desc_narrow_sepia", comment: "")))
 
-        transformation = CLDTransformation().setEffect(CLDTransformation.CLDEffect.saturation, param: "100")
+        transformation = CLDTransformation().setEffect(CLDTransformation.CLDEffect.saturation, param: "100").setRadius(50);
         result.append(EffectMetadata(transformation: transformation, name: resource.name, description: NSLocalizedString("effect_desc_face_sat_round", comment: "")))
 
         transformation = CLDTransformation().setEffect(CLDTransformation.CLDEffect.blue, param: "100")
@@ -61,6 +61,19 @@ class CloudinaryHelper {
 
         transformation = CLDTransformation().setOverlay("video:\(resource.publicId!)").setWidth(0.25)
         result.append(EffectMetadata(transformation: transformation, name: resource.name, description: NSLocalizedString("effect_desc_video_overlay", comment: "")))
+
+        transformation = CLDTransformation().setAngle(20)
+        result.append(EffectMetadata(transformation: transformation, name: resource.name, description: NSLocalizedString("effect_desc_video_rotate", comment: "")))
+
+        transformation = CLDTransformation().setEffect("fade", param: "1000")
+        result.append(EffectMetadata(transformation: transformation, name: resource.name, description: NSLocalizedString("effect_desc_video_fade_in", comment: "")))
+
+        transformation = CLDTransformation().setEffect("noise", param: "100")
+        result.append(EffectMetadata(transformation: transformation, name: resource.name, description: NSLocalizedString("effect_desc_video_noise", comment: "")))
+
+        transformation = CLDTransformation().setEffect("reverse")
+        result.append(EffectMetadata(transformation: transformation, name: resource.name, description: NSLocalizedString("effect_desc_video_reverse", comment: "")))
+
 
         return result
     }
