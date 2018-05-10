@@ -1,0 +1,20 @@
+/* 
+  Localizable.strings
+  SampleApp
+
+  Created by Nitzan Jaitman on 05/09/2017.
+  Copyright © 2017 Cloudinary. All rights reserved.
+*/
+
+"effect_desc_face_sat_round"="Add rounded corners and increate saturation";
+"effect_desc_face_sharpen"="Sharpen the image";
+"effect_desc_wide_blue"="Increase the intensity of the blue channel";
+"effect_desc_narrow_sepia"="Apply a sepia effect";
+"effect_desc_face_oilpaint"="Apply oil paint effect";
+
+"effect_desc_video_rotate"="Rotate the video by 20 degrees (automatically adds a bounding box)";
+"effect_desc_video_fade_in"="Fade in";
+"effect_desc_video_overlay"="Add video overlay";
+"effect_desc_video_noise"="Add noise";
+"effect_desc_video_blur"="Blur video";
+"effect_desc_video_reverse"="Reverse video";
