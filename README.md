@@ -1,7 +1,7 @@
 Cloudinary iOS Sample application
 ================================
 Cloudinary is a cloud service that offers a solution to an application's entire image management pipeline.
-This sample app demonstrates the Cloudinary capabilities using Cloudinary's[native iOS sdk](https://github.com/cloudinary_ios).
+This sample app demonstrates the Cloudinary capabilities using Cloudinary's [native iOS sdk](https://github.com/cloudinary/cloudinary_ios).
 
 ## Features
 * Easily upload images and videos to the cloud.
