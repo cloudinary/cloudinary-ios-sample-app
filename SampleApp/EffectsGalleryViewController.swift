@@ -46,7 +46,7 @@ class EffectsGalleryViewController: UIViewController, UploadedResourceDetails {
         self.avpController = AVPlayerViewController()
         self.avpController.player = self.player
         avpController.view.frame = videoView.frame
-        self.addChildViewController(avpController)
+        self.addChild(avpController)
         self.currEffectContainer.addSubview(avpController.view)
 
         self.isVideo = resource.resourceType == "video"

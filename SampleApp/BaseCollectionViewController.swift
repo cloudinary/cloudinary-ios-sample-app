@@ -95,10 +95,10 @@ extension BaseCollectionViewController: UICollectionViewDataSource {
     internal func setLocalImage(imageView: UIImageView, resource: CLDResource) {
         if let image = Utils.getImage(relativePath: resource.localPath!) {
             imageView.image = image
-            imageView.contentMode = UIViewContentMode.scaleAspectFill
+            imageView.contentMode = UIView.ContentMode.scaleAspectFill
         } else {
             imageView.image = resource.resourceType!.contains("video") ? UIImage(named: "ic_movie_white") : UIImage(named: "ic_cloudinary")
-            imageView.contentMode = UIViewContentMode.center
+            imageView.contentMode = UIView.ContentMode.center
         }
     }
 }

@@ -50,16 +50,23 @@ class TabContainerViewController: UIViewController, UIImagePickerControllerDeleg
     }
 
     @IBAction func showPicker(_ sender: Any) {
-        PHPhotoLibrary.requestAuthorization({ (status: PHAuthorizationStatus) -> Void in
-            ()
-            if PHPhotoLibrary.authorizationStatus() == PHAuthorizationStatus.authorized {
-                let imagePickerController = UIImagePickerController()
-                imagePickerController.sourceType = .photoLibrary
-                imagePickerController.mediaTypes = [kUTTypeImage as String, kUTTypeMovie as String]
-                imagePickerController.delegate = self
-                self.present(imagePickerController, animated: true, completion: nil)
-            }
-        })
+        if PHPhotoLibrary.authorizationStatus() == PHAuthorizationStatus.authorized{
+            doShowPicker()
+        } else {
+            PHPhotoLibrary.requestAuthorization({ (status: PHAuthorizationStatus) -> Void in ()
+                if PHPhotoLibrary.authorizationStatus() == PHAuthorizationStatus.authorized {
+                    self.doShowPicker()
+                }
+            })
+        }
+    }
+    
+    private func doShowPicker(){
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.sourceType = .photoLibrary
+        imagePickerController.mediaTypes = [kUTTypeImage as String, kUTTypeMovie as String]
+        imagePickerController.delegate = self
+        present(imagePickerController, animated: true, completion: nil)
     }
 
     // Clear all local data (including cloud name)
@@ -70,9 +77,9 @@ class TabContainerViewController: UIViewController, UIImagePickerControllerDeleg
     }
 
     // MARK: UIImagePickerControllerDelegate
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
-        let imageUrl = info[UIImagePickerControllerReferenceURL] as! URL
-        let contentType = info[UIImagePickerControllerMediaType] as! String
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]){
+        let imageUrl = info[UIImagePickerController.InfoKey.referenceURL] as! URL
+        let contentType = info[UIImagePickerController.InfoKey.mediaType] as! String
         let resourceType = contentType.contains("movie") ? CLDUrlResourceType.video : CLDUrlResourceType.image
         Utils.saveImageUrl(imageUrl: imageUrl as URL, contentType: contentType) { url, name in
             if let url = url {
