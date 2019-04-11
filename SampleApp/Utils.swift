@@ -72,7 +72,7 @@ class Utils {
         let photoURL = NSURL(fileURLWithPath: documentDirectory)
         let localPath = photoURL.appendingPathComponent(name)
 
-        let data = UIImagePNGRepresentation(image)
+        let data = image.pngData()
 
         do {
             try data?.write(to: localPath!, options: Data.WritingOptions.atomic)
